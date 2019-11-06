@@ -1,0 +1,80 @@
+#include<stdio.h>
+void main()
+{
+	int np,i,p[20],f[10],count[10],nf,f1,f2,j,fault=0,temp,k,max,p1;
+  printf("\nEnter the number of pages:\n");
+  scanf("%d",&np);
+  printf("\nEnter the reference string:\n");
+  for(i=0;i<np;i++)
+  {
+  scanf("%d",&p[i]);
+  }
+  printf("\nEnter the number of frames:\n");
+  scanf("%d",&nf);
+  for(i=0;i<nf;i++)
+  {
+    f[i]=-1;
+    count[i]=0;
+  }
+  printf("\n\nFRAME ALLOCATION\n\n");
+  for(i=0;i<np;i++)
+  {
+    f1=f2=0;
+    for(j=0;j<nf;j++)
+    {
+      if(f[j]==p[i])
+      {
+        f1=f2=1;
+        break;
+      }
+    }
+    if(f1==0)
+    {
+      for(j=0;j<nf;j++)
+      {
+        if(f[j]==-1)
+        {
+          f[j]=p[i];
+          fault++;
+          f2=1;
+          break;
+        }
+      }
+    }
+    if(f2==0)
+    {
+      fault++;
+      for(j=0;j<nf;j++)
+      {
+        temp=f[j];
+        for(k=i;k<np;k++)
+        {
+          if(temp!=p[i])
+          {
+            count[j]++;
+          }
+          else
+          {
+            break;
+          }
+        }
+      }
+      max=0;
+      for(j=0;j<nf;j++)
+      {
+        if(max<count[j])
+        {
+          max=count[j];
+          p1=j;
+        }
+      }
+      f[p1]=p[i];
+    }
+    printf("\n");
+    for(j=0;j<nf;j++)
+    {
+      printf("%d\t\t",f[j]);
+    }
+  }
+printf("\n\nTotal page fault = %d",fault);
+}
