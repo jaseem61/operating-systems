@@ -16,6 +16,7 @@ void main()
     f[i]=-1;
   }
   k=0;
+  printf("\n\nFRAME ALLOCATION\n\n");
   for(i=0;i<np;i++)
   {
   	f1=f2=0;
